@@ -11,7 +11,6 @@
             getRepository();
           "
         >
-          {{ inputSearch }}
           <img src="../../assets/search.png" />
         </button>
       </div>
