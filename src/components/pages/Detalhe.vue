@@ -1,65 +1,68 @@
 <template>
-  <div>
-    <div>
+  <div v-if="repos.name">
+    <header id="header">
+      <div><span>Github</span> <span>Search</span></div>
       <div class="search">
-        <img src="../../assets/GithubSearch.png" />
-        <div class="search-area">
-          <input type="text" v-model="inputSearch" class="search-input" />
-          <button class="search-btn" v-on:click="getUser">
-            <img src="../../assets/search.png" />
-          </button>
-        </div>
+        <input type="text" class="search-input" v-model="inputSearch" />
+        <button
+          class="search-btn"
+          v-on:click="
+            getInfo();
+            getRepository();
+          "
+        >
+          {{ inputSearch }}
+          <img src="../../assets/search.png" />
+        </button>
       </div>
-      <!-- <Home /> -->
+    </header>
+    <!-- <Search /> -->
+    <div class="container">
+      <!-- <Aside /> -->
+      <aside id="sidebar">
+        <img class="img-perfil" :src="repos.avatar_url" />
+        <h2>{{ repos.name }}</h2>
+        <ul>
+          <li>
+            <img src="../../assets/organization.png" />{{ repos.company }}
+          </li>
+          <li><img src="../../assets/location.png" />{{ repos.location }}</li>
+          <li><img src="../../assets/star.png" />{{ repos.followers }}</li>
+          <li>
+            <img src="../../assets/repository.png" />{{ repos.following }}
+          </li>
+          <li>
+            <img src="../../assets/followers.png" />{{ repos.public_gists }}
+          </li>
+        </ul>
+      </aside>
+      <main id="repositorios">
+        <!-- <Repository :title='repostorio' /> -->
+        <section v-for="repo in repostorio" v-bind:key="repo.id">
+          <strong> {{ repo.name }}</strong>
+          <p>{{ repo.description }}</p>
+          <span><img src="../../assets/star.png" /> {{ repo.forks }}</span>
+        </section>
+      </main>
     </div>
-    <h2>{{ error }}</h2>
-    <div>
-      <header id="header">
-        <div><span>Github</span> <span>Search</span></div>
-        <div class="search">
-          <input type="text" class="search-input" v-model="inputSearch" />
-          <button
-            class="search-btn"
-            v-on:click="
-              getInfo();
-              getRepository();
-            "
-          >
-            {{ inputSearch }}
-            <img src="../../assets/search.png" />
-          </button>
-        </div>
-      </header>
-      <!-- <Search /> -->
-      <div class="container">
-        <!-- <Aside /> -->
-        <aside id="sidebar">
-          <img class="img-perfil" :src="repos.avatar_url" />
-          <h2>{{ repos.name }}</h2>
-          <ul>
-            <li>
-              <img src="../../assets/organization.png" />{{ repos.company }}
-            </li>
-            <li><img src="../../assets/location.png" />{{ repos.location }}</li>
-            <li><img src="../../assets/star.png" />{{ repos.followers }}</li>
-            <li>
-              <img src="../../assets/repository.png" />{{ repos.following }}
-            </li>
-            <li>
-              <img src="../../assets/followers.png" />{{ repos.public_gists }}
-            </li>
-          </ul>
-        </aside>
-        <main id="repositorios">
-          <!-- <Repository :title='repostorio' /> -->
-          <section v-for="repo in repostorio" v-bind:key="repo.id">
-            <strong> {{ repo.name }}</strong>
-            <p>{{ repo.description }}</p>
-            <span><img src="../../assets/star.png" /> {{ repo.forks }}</span>
-          </section>
-        </main>
-      </div>
+  </div>
+
+  <div class="search-home" v-else>
+    <img src="../../assets/GithubSearch.png" />
+    <div class="search-area">
+      <input type="text" v-model="inputSearch" class="search-input" />
+      <button
+        class="search-btn"
+        v-on:click="
+          getUser();
+          getRepository();
+        "
+      >
+        <img src="../../assets/search.png" />
+      </button>
     </div>
+    <!-- <Home /> -->
+   
   </div>
 </template>
 
@@ -126,12 +129,12 @@ export default {
 }
 
 /* home */
-.search {
+.search-home {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* height: 100vh; */
+  height: 100vh;
 }
 
 .search-area {
