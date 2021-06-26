@@ -7,7 +7,7 @@
         <button
           class="search-btn"
           v-on:click="
-            getInfo();
+            getUser();
             getRepository();
           "
         >
@@ -38,7 +38,7 @@
       <main id="repositorios">
         <!-- <Repository :title='repostorio' /> -->
         <section v-for="repo in repostorio" v-bind:key="repo.id">
-          <strong> {{ repo.name }}</strong>
+          <strong> <a :href=repo.svn_url target="_blank">{{ repo.name }}</a></strong>
           <p>{{ repo.description }}</p>
           <span><img src="../../assets/star.png" /> {{ repo.forks }}</span>
         </section>
@@ -61,7 +61,6 @@
       </button>
     </div>
     <!-- <Home /> -->
-   
   </div>
 </template>
 
@@ -95,16 +94,6 @@ export default {
         .then((response) => {
           this.repos = response.data;
           // this.repos = response;
-        })
-        .catch((this.vazio = "a"));
-    },
-
-    getInfo() {
-      axios
-        .get(`https://api.github.com/users/${this.inputSearch}`)
-        .then((response) => {
-          this.repos = response.data;
-          // this.repos = response;
         });
     },
     getRepository() {
@@ -114,7 +103,6 @@ export default {
         .then((response) => {
           this.repostorio = response.data;
           // this.repos = response;
-          console.log();
         });
     },
   },
@@ -184,6 +172,7 @@ export default {
 }
 /* aside */
 #sidebar h2 {
+   color: #000;
   font-size: 36px;
   line-height: 42.66px;
   font-family: "Rubik", sans-serif;
@@ -215,9 +204,11 @@ export default {
 }
 
 #repositorios strong {
-  color: #000;
   font-size: 36px;
   line-height: 42.66px;
+}
+#repositorios strong a{
+  color: #000;
 }
 #repositorios p {
   font-size: 24px;
