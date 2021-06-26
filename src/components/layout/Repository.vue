@@ -1,11 +1,11 @@
 <template>
+  <button v-on:click="getRepository">start {{ title }}</button>
+
   <div>
     <main id="repositorios">
       <section v-for="repo in repostorio" v-bind:key="repo.id">
         <strong> {{ repo.name }}</strong>
-        <p>
-          {{ repo.description }}
-        </p>
+        <p>{{ repo.description }}</p>
         <span><img src="../../assets/star.png" /> {{ repo.forks }}</span>
       </section>
     </main>
@@ -15,25 +15,39 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'Repositorios',
-  props: ['title'],
+  name: "Repositorios",
+  props: ["title"],
   data() {
     return {
       repostorio: null,
     };
   },
-  created() {
-    axios
-      .get('https://api.github.com/users/moraes3000/repos')
-      // .get(`https://api.github.com/users/${this.title}/repos`)
-      .then((response) => {
-        this.repostorio = response.data;
-        // this.repos = response;
-        console.log();
-      });
+  // created() {
+  //   axios
+  //     .get('https://api.github.com/users/moraes3000/repos')
+  //     // .get(`https://api.github.com/users/${this.title}/repos`)
+  //     .then((response) => {
+  //       this.repostorio = response.data;
+  //       // this.repos = response;
+  //       console.log();
+  //     });
+  // },
+  methods: {
+    // getRepository() {
+    //   alert(`clicou em ${this.title}`);
+    //   axios
+    //     // .get("https://api.github.com/users/moraes3000/repos")
+    //     .get(`https://api.github.com/users/${this.title}/repos`)
+    //     .then((response) => {
+    //       this.repostorio = response.data;
+    //       // this.repos = response;
+    //       console.log();
+    //     });
+    //   alert("chego");
+    // },
   },
 };
 </script>

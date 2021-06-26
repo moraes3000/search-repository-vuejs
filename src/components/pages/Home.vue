@@ -6,54 +6,10 @@
       <button class="search-btn" v-on:click=getUserInfo>
         <img src="../../assets/search.png" />
       </button>
-    </div>
-    <h1>info</h1>
-    {{ info }}
-    <h1>repo -</h1>
-    {{ repos }}
+    </div>  
   </div>
 </template>
 
-<script>
-import axios from 'axios';
-
-export default {
-  name: 'Home',
-  data() {
-    return {
-      github: '',
-      user: '',
-      repos: [],
-      info: [],
-    };
-  },
-  methods: {
-    getUserInfo() {
-      // const user = e.target.value;
-      axios
-        .get(`https://api.github.com/users/${this.user}`)
-        .then((response) => {
-          this.info = response.data;
-        });
-      // .catch(error => console.log(error));
-      this.$router.Push('HelloWorld');
-    },
-    getUserRepo() {
-      // const user = e.target.value;
-      axios
-        .get(`https://api.github.com/users/${this.user}/repos`)
-        .then((response) => {
-          this.repos = response.data;
-        });
-      // .catch(error => console.log(error));
-    },
-
-    getUser() {
-
-    },
-  },
-};
-</script>
 
 <style  scoped>
 .search {
