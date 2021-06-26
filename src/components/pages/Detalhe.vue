@@ -38,7 +38,9 @@
       <main id="repositorios">
         <!-- <Repository :title='repostorio' /> -->
         <section v-for="repo in repostorio" v-bind:key="repo.id">
-          <strong> <a :href=repo.svn_url target="_blank">{{ repo.name }}</a></strong>
+          <strong>
+            <a :href="repo.svn_url" target="_blank">{{ repo.name }}</a></strong
+          >
           <p>{{ repo.description }}</p>
           <span><img src="../../assets/star.png" /> {{ repo.forks }}</span>
         </section>
@@ -165,6 +167,7 @@ export default {
 }
 #header span:first-child {
   font-family: "Roboto Mono", monospace;
+  color: #000;
 }
 #header span:last-child {
   font-family: "Rubik", sans-serif;
@@ -172,7 +175,7 @@ export default {
 }
 /* aside */
 #sidebar h2 {
-   color: #000;
+  color: #000;
   font-size: 36px;
   line-height: 42.66px;
   font-family: "Rubik", sans-serif;
@@ -207,7 +210,7 @@ export default {
   font-size: 36px;
   line-height: 42.66px;
 }
-#repositorios strong a{
+#repositorios strong a {
   color: #000;
 }
 #repositorios p {
